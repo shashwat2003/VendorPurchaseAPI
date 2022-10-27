@@ -23,7 +23,7 @@ class Purchase(models.Model):
     added_by = models.ForeignKey("UserApp.User",
                                  on_delete=models.SET_NULL,
                                  null=True)
-    timestamp = models.DateTimeField(auto_add=True)
+    timestamp = models.DateTimeField(auto_now=True)
 
 
 class Contract(models.Model):
@@ -37,4 +37,4 @@ class Contract(models.Model):
                                  on_delete=models.SET_NULL,
                                  null=True)
     contract = models.FileField()
-    timestamp = models.DateTimeField(auto_add=True)
+    timestamp = models.DateTimeField(auto_now=True)
