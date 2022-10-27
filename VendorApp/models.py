@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True, primary_key=True)
 
 
 class Vendor(models.Model):
@@ -16,7 +16,7 @@ class Vendor(models.Model):
     bank_details = models.ManyToManyField("UserApp.BankDetail",
                                           related_name="vendors")
     pan_number = models.CharField(max_length=10)
-    gst_number = models.CharField(max_length=20)
+    gst_number = models.CharField(max_length=20, unique=True, primary_key=True)
     msme_certified = models.BooleanField(default=False)
     msme_certificate = models.FileField()
     payment_cycle = models.ForeignKey("UserApp.Info",

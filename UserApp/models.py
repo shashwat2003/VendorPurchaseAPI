@@ -23,7 +23,7 @@ class Info(models.Model):
 
 class BankDetail(models.Model):
     acc_name = models.CharField(max_length=40)
-    acc_number = models.CharField(max_length=30)
+    acc_number = models.CharField(max_length=30, primary_key=True, unique=True)
     ifsc = models.CharField(max_length=10)
     bank_name = models.CharField(max_length=40)
     bank_address = models.CharField(max_length=100)
