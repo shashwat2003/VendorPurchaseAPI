@@ -14,3 +14,16 @@ class User(AbstractUser):
 
 class Role(models.Model):
     name = models.CharField(max_length=10, unique=True, primary_key=True)
+
+
+class Info(models.Model):
+    type = models.CharField(max_length=20)
+    value = models.CharField(max_length=20)
+
+
+class BankDetail(models.Model):
+    acc_name = models.CharField(max_length=40)
+    acc_number = models.CharField(max_length=30)
+    ifsc = models.CharField(max_length=10)
+    bank_name = models.CharField(max_length=40)
+    bank_address = models.CharField(max_length=100)
