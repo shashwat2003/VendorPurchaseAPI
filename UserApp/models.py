@@ -27,3 +27,6 @@ class BankDetail(models.Model):
     ifsc = models.CharField(max_length=10)
     bank_name = models.CharField(max_length=40)
     bank_address = models.CharField(max_length=100)
+    vendor = models.ForeignKey("VendorApp.Vendor",
+                               null=True,
+                               on_delete=models.SET_NULL)

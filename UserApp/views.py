@@ -3,7 +3,9 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import *
 from django.contrib.auth import authenticate, login
+from VendorPurchaseAPI.constant_functions import responses, statusCodes
 from .models import *
+from VendorApp.models import Category
 # Create your views here.
 
 
@@ -35,3 +37,24 @@ class UserLoginView(APIView):
         else:
             return Response({"error": "Invalid Username or Password..."},
                             status=HTTP_400_BAD_REQUEST)
+
+
+class InfoView(APIView):
+
+    def get(self, request: Request):
+        if request.user.is_authenticated and request.user.role.name == "admin":
+            queryType = request.query_params.get("query", "").upper()
+            data = []
+            if queryType == "CATEGORY":
+                for item in Category.objects.all():
+                    data.append({
+                        "value": item.name,
+                        "label": item.name.upper()
+                    })
+            else:
+                for item in Info.objects.filter(type=queryType):
+                    data.append({"value": item.id, "label": item.value})
+            return Response(data)
+        else:
+            return Response(responses.UNAUTHENTICATED,
+                            statusCodes.UNAUTHENTICATED)

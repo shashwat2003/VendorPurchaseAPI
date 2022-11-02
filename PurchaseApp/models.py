@@ -15,6 +15,9 @@ class Purchase(models.Model):
     inv_amount = models.CharField(max_length=9)
     invoice = models.FileField()
     gst_perc = models.FloatField(default=0.0)
+    mode = models.ForeignKey("UserApp.Info",
+                             null=True,
+                             on_delete=models.SET_NULL)
     remarks = models.TextField()
     payment_status = models.BooleanField(default=False)
     payment_date = models.DateField()
