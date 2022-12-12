@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  vpm_db:
+    image: mysql:8
+    ports: 
+      - 3307:3306
+    environment:
+      - MYSQL_DATABASE=vendor_management_api
+      - MYSQL_USER=testing
+      - MYSQL_ROOT_PASSWORD=Password@123
+      - MYSQL_PASSWORD=Password@123
+    volumes:
+      - ./database:/var/lib/mysql
+    container_name: vpm_db
+  
+  vpm_pma:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=vpm_db
+    ports:
+      - 88:80
+    restart: always
+    container_name: vpm_pma
+    links:
+      - vpm_db
+    depends_on:
+      - vpm_db
+
+  vpm_api:
+    build:
+      context: .
+    volumes:
+      - .:/vendorPurchaseAPI
+    ports:
+      - 0.0.0.0:8081:8000
+    image: vpm:backend
+    container_name: vpm_api
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
+    links:
+      - vpm_db
+    depends_on:
+      - vpm_db
