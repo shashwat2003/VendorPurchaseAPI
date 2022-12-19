@@ -32,11 +32,13 @@ services:
       context: .
     volumes:
       - .:/vendorPurchaseAPI
+      - ./media:/var/www/data
     ports:
       - 0.0.0.0:8081:8000
     image: vpm:backend
     container_name: vpm_api
-    command: python manage.py runserver 0.0.0.0:8000
+    # Open and stall the container
+    command: /bin/sh -c "while sleep 1000; do :; done"
     restart: always
     links:
       - vpm_db
