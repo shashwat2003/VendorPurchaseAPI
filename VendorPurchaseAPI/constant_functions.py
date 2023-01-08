@@ -6,5 +6,6 @@ statusCodes = {
     "UNAUTHENTICATED": status.HTTP_401_UNAUTHORIZED,
     "ERROR": status.HTTP_400_BAD_REQUEST,
     "SUCCESS": status.HTTP_200_OK,
-    "CREATED": status.HTTP_201_CREATED
+    "CREATED": status.HTTP_201_CREATED,
+    "ACCEPTED": status.HTTP_202_ACCEPTED
 }

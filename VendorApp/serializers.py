@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, CharField
 from .models import *
 
 
@@ -13,5 +13,20 @@ class VendorViewSerializer(ModelSerializer):
 
     class Meta:
         model = Vendor
+        fields = "__all__"
+        depth = 1
+
+
+class BankDetailSerializer(ModelSerializer):
+
+    class Meta:
+        model = BankDetail
+        fields = "__all__"
+
+
+class BankDetailViewSerializer(ModelSerializer):
+
+    class Meta:
+        model = BankDetail
         fields = "__all__"
         depth = 1

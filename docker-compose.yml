@@ -19,7 +19,7 @@ services:
     environment:
       - PMA_HOST=vpm_db
     ports:
-      - 88:80
+      - 90:80
     restart: always
     container_name: vpm_pma
     links:
@@ -32,7 +32,6 @@ services:
       context: .
     volumes:
       - .:/vendorPurchaseAPI
-      - ./media:/var/www/data
     ports:
       - 0.0.0.0:8081:8000
     image: vpm:backend

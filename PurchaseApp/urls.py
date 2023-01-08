@@ -17,6 +17,6 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('', VendorView.as_view()),
-    path('bank_detail/', BankDetailsView.as_view()),
+    path('contract/', ContractView.as_view()),
+    path("", PurchaseView.as_view())
 ]

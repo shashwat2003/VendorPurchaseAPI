@@ -2,7 +2,10 @@ from django.db import models
 
 
 def upload_msme_certificate(instance, filename):
-    return "msme_certificates/{0}/{1}".format(instance.id, filename)
+    print("Heeell")
+    print(instance)
+    print(filename)
+    return "msme_certificates/{0}/{1}".format(instance.name, filename)
 
 
 # Create your models here.
@@ -27,3 +30,15 @@ class Vendor(models.Model):
                                       on_delete=models.SET_NULL,
                                       null=True,
                                       related_name="cyclic_vendors")
+
+
+class BankDetail(models.Model):
+    acc_name = models.CharField(max_length=40)
+    acc_number = models.CharField(max_length=30, primary_key=True, unique=True)
+    ifsc = models.CharField(max_length=20)
+    bank_name = models.CharField(max_length=40)
+    bank_address = models.CharField(max_length=100)
+    vendor = models.ForeignKey("VendorApp.Vendor",
+                               null=True,
+                               on_delete=models.SET_NULL)
+    added_by = models.ForeignKey("UserApp.User", on_delete=models.PROTECT)

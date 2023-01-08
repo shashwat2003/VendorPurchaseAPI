@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.urls import path, include
 from UserApp.views import UserLoginView, InfoView
+from Common.views import UploadFileView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('user/', UserLoginView.as_view()),
     path('options/', InfoView.as_view()),
-    path('vendor/', include("VendorApp.urls"))
-]
+    path('vendor/', include("VendorApp.urls")),
+    path('purchase/', include("PurchaseApp.urls")),
+    path('upload/', UploadFileView.as_view())
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
